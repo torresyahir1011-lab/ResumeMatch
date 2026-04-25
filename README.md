@@ -1,5 +1,6 @@
 # ResumeMatch
 ResumeMatch is a machine learning system that analyzes resume text to predict a candidate’s job category and recommend relevant job descriptions using semantic similarity. The project combines supervised learning for classification with embedding-based retrieval to create a practical tool for matching candidates to roles.
+
 What it Does
 This project takes a user-provided resume and performs two main tasks. First, it classifies the resume into a job category (e.g., Data Science, Software Engineering, Finance) using machine learning models. Second, it recommends the most relevant job descriptions by computing semantic similarity between the resume and a set of job postings using sentence embeddings. The system demonstrates how natural language processing techniques can be applied to real-world hiring and recruiting problems.
 Quick Start
