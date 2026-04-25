@@ -16,8 +16,9 @@ python src/main.py
 Input: Resume text
 Output:
 Predicted job category
+
 Top 3 matching job descriptions
-#Video Links
+## Video Links
 Demo Video: [Insert Link]
 Technical Walkthrough: [Insert Link]
 ## Evaluation
