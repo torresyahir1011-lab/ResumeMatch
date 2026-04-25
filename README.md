@@ -14,12 +14,14 @@ pip install -r requirements.txt
 python src/main.py
 4. Example usage
 Input: Resume text
+
 Output:
 Predicted job category
 
 Top 3 matching job descriptions
 ## Video Links
 Demo Video: [Insert Link]
+
 Technical Walkthrough: [Insert Link]
 ## Evaluation
 We evaluate the system using both classification and retrieval performance:
