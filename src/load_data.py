@@ -18,7 +18,10 @@ def simplify_label(label):
         return "Other"
         
 def load_data():
-    resumes = pd.read_csv("data/raw/Resume.csv")
+    # Keep only major categories
+    valid_labels = ["Software/Engineering", "Data/AI", "Finance", "Marketing"]
+
+    resumes = resumes[resumes['label'].isin(valid_labels)]
     jobs = pd.read_csv("data/raw/jobs.csv")
 
     # ----------------------
