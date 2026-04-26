@@ -24,25 +24,7 @@ Demo Video: [Insert Link]
 
 Technical Walkthrough: [Insert Link]
 ## Evaluation
-We evaluate the system using both classification and retrieval performance:
-
-Classification Metrics
-
-- Accuracy
-- Precision / Recall / F1-score
-
-Model Comparison
-
-- Baseline: TF-IDF + Logistic Regression
-- Advanced: Fine-tuned BERT model
-
-Retrieval Evaluation
-
-- Cosine similarity between resume and job descriptions
-- Qualitative analysis of recommendation relevance
-
-Key Findings
-
-- Transformer-based models outperform baseline methods in classification accuracy
-- Embedding-based retrieval provides more semantically meaningful job matches compared to keyword matching
-- Preprocessing improves performance by reducing noise in resume text
+The project was evaluated across two components: resume classification and job matching.
+For classification, we implemented a TF-IDF + Logistic Regression baseline model. Initial results showed near-zero accuracy due to highly granular and imbalanced job title labels. We addressed this by simplifying labels into broader categories (e.g., Software/Engineering, Data/AI) and applying class balancing techniques. While these improvements increased stability, the classifier still struggled due to noisy real-world resume data and overlapping skill sets across job categories.
+For job matching, we implemented a semantic similarity approach using sentence embeddings (all-MiniLM-L6-v2) and cosine similarity. This method produced significantly more meaningful results, correctly identifying relevant job roles even when classification predictions were incorrect. For example, a resume incorrectly classified as “Finance” was still matched to “Software Engineer” and “Data Scientist” roles based on skill similarity.
+Overall, this demonstrates that embedding-based retrieval is more robust than traditional classification methods for resume-to-job matching tasks.
