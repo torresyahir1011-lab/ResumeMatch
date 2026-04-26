@@ -32,12 +32,29 @@ def load_data():
     # ----------------------
     # Create TEXT field
     # ----------------------
-    resumes['text'] = (
-        resumes['skills'].fillna('') + ' ' +
-        resumes['career_objective'].fillna('') + ' ' +
-        resumes['positions'].fillna('')
-    )
+    def clean_list_column(col):
+    # If it's already a string, just return
+    if isinstance(col, str):
+        return col
 
+    # If it's a list, join it
+    try:
+        return " ".join(col)
+    except:
+        return str(col)
+
+
+    # Apply cleaning to key columns
+    resumes['skills'] = resumes['skills'].apply(clean_list_column)
+    resumes['positions'] = resumes['positions'].apply(clean_list_column)
+    resumes['career_objective'] = resumes['career_objective'].fillna('')
+
+    # Now create text
+    resumes['text'] = (
+    resumes['skills'] + " " +
+    resumes['career_objective'] + " " +
+    resumes['positions']
+    )
     # ----------------------
     # Create LABEL
     # ----------------------
