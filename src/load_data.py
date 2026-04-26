@@ -1,5 +1,22 @@
 import pandas as pd
 
+
+def simplify_label(label):
+    label = str(label).lower()
+
+    if "engineer" in label or "developer" in label:
+        return "Software/Engineering"
+    elif "data" in label or "machine learning" in label or "ai" in label:
+        return "Data/AI"
+    elif "marketing" in label:
+        return "Marketing"
+    elif "finance" in label or "account" in label or "audit" in label:
+        return "Finance"
+    elif "hr" in label:
+        return "HR"
+    else:
+        return "Other"
+        
 def load_data():
     resumes = pd.read_csv("data/raw/Resume.csv")
     jobs = pd.read_csv("data/raw/jobs.csv")
