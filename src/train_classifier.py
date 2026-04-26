@@ -29,7 +29,7 @@ def train():
     # ----------------------
     # Train model
     # ----------------------
-    model = LogisticRegression(max_iter=1000)
+    model = LogisticRegression(max_iter=1000, class_weight='balanced')
     model.fit(X_train_vec, y_train)
 
     # ----------------------
