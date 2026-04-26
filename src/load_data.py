@@ -22,6 +22,8 @@ def load_data():
     valid_labels = ["Software/Engineering", "Data/AI", "Finance", "Marketing"]
 
     resumes = resumes[resumes['label'].isin(valid_labels)]
+    # Balance dataset (limit each class)
+    resumes = resumes.groupby('label').head(800)
     jobs = pd.read_csv("data/raw/jobs.csv")
 
     # ----------------------
