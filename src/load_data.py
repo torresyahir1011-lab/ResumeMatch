@@ -5,7 +5,7 @@ def load_data():
     resumes = pd.read_csv("data/raw/Resume.csv")
 
     # Load only a small sample of jobs (file is huge)
-    jobs = pd.read_csv("data/raw/job_descriptions.csv", nrows=10)
+    jobs = pd.read_csv("data/raw/jobs.csv")
 
     print("=== Resume Columns ===")
     print(resumes.columns.tolist())
