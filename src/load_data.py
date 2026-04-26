@@ -43,7 +43,6 @@ def load_data():
     except:
         return str(col)
 
-
     # Apply cleaning to key columns
     resumes['skills'] = resumes['skills'].apply(clean_list_column)
     resumes['positions'] = resumes['positions'].apply(clean_list_column)
