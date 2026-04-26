@@ -17,7 +17,7 @@ This project takes a resume as input and performs two tasks. First, it classifie
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repo-link>
+git clone (https://github.com/torresyahir1011-lab/ResumeMatch)
 cd ResumeMatch
 ```
 
