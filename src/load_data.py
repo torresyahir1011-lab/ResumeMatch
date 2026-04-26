@@ -1,13 +1,20 @@
+import pandas as pd
+
 def load_data():
+    # ----------------------
+    # Load data
+    # ----------------------
     resumes = pd.read_csv("data/raw/Resume.csv")
     jobs = pd.read_csv("data/raw/jobs.csv")
 
+    # ----------------------
     # Clean column names
+    # ----------------------
     resumes.columns = resumes.columns.str.strip()
     resumes.rename(columns={'\ufeffjob_position_name': 'job_position_name'}, inplace=True)
 
     # ----------------------
-    # Clean list columns
+    # Clean list-like columns
     # ----------------------
     def clean_list_column(col):
         if isinstance(col, str):
@@ -22,7 +29,7 @@ def load_data():
     resumes['career_objective'] = resumes['career_objective'].fillna('')
 
     # ----------------------
-    # Create text
+    # Create text field
     # ----------------------
     resumes['text'] = (
         resumes['skills'] + " " +
@@ -34,7 +41,7 @@ def load_data():
     resumes['text'] = resumes['text'].str.replace(r"[^a-zA-Z\s]", " ", regex=True)
 
     # ----------------------
-    # Labels
+    # Simplify labels
     # ----------------------
     def simplify_label(label):
         label = str(label).lower()
@@ -54,16 +61,30 @@ def load_data():
     resumes['label'] = resumes['job_position_name'].apply(simplify_label)
 
     # ----------------------
-    # FILTER + BALANCE (PUT IT HERE)
+    # Filter + balance dataset
     # ----------------------
     valid_labels = ["Software/Engineering", "Data/AI", "Finance", "Marketing"]
     resumes = resumes[resumes['label'].isin(valid_labels)]
 
+    # Limit each class to 800 samples
     resumes = resumes.groupby('label').head(800)
 
     print("\nLabel distribution:")
     print(resumes['label'].value_counts())
 
+    # ----------------------
+    # Final dataset
+    # ----------------------
     resumes = resumes[['text', 'label']]
 
+    print("\nCleaned Resume Data:")
+    print(resumes.head())
+
+    print("\nJob Data:")
+    print(jobs.head())
+
     return resumes, jobs
+
+
+if __name__ == "__main__":
+    load_data()
