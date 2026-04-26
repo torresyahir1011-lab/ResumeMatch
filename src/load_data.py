@@ -33,15 +33,15 @@ def load_data():
     # Create TEXT field
     # ----------------------
     def clean_list_column(col):
-    # If it's already a string, just return
-    if isinstance(col, str):
-        return col
+        # If it's already a string, just return
+        if isinstance(col, str):
+            return col
 
-    # If it's a list, join it
-    try:
-        return " ".join(col)
-    except:
-        return str(col)
+        # If it's a list, join it
+        try:
+            return " ".join(col)
+        except:
+            return str(col)
 
     # Apply cleaning to key columns
     resumes['skills'] = resumes['skills'].apply(clean_list_column)
