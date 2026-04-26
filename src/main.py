@@ -1,61 +1,45 @@
-import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
+from load_data import load_data
+from train_classifier import train
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
-# ----------------------
-# Dummy data (replace later)
-# ----------------------
-resumes = [
-    "Experienced Python developer with machine learning background",
-    "Financial analyst with experience in investment banking",
-    "Marketing specialist with social media expertise"
-]
 
-labels = ["Software", "Finance", "Marketing"]
+def run_demo():
+    print("Loading data...")
+    resumes, jobs = load_data()
 
-job_descriptions = [
-    "Looking for a software engineer with Python and ML experience",
-    "Hiring financial analyst with banking background",
-    "Seeking marketing expert for social media campaigns"
-]
+    print("\nTraining classifier...")
+    model, vectorizer = train()
 
-# ----------------------
-# 1. Classification model
-# ----------------------
-vectorizer = TfidfVectorizer()
-X = vectorizer.fit_transform(resumes)
+    # Pick a sample resume
+    test_resume = resumes.iloc[0]['text']
 
-clf = LogisticRegression()
-clf.fit(X, labels)
+    print("\n=== TEST RESUME ===")
+    print(test_resume[:300], "...")
 
-# ----------------------
-# 2. Embedding model
-# ----------------------
-embed_model = SentenceTransformer('all-MiniLM-L6-v2')
+    # ----------------------
+    # Classification
+    # ----------------------
+    X_vec = vectorizer.transform([test_resume])
+    pred_label = model.predict(X_vec)[0]
 
-job_embeddings = embed_model.encode(job_descriptions)
+    print("\nPredicted Category:", pred_label)
 
-# ----------------------
-# 3. Test resume
-# ----------------------
-test_resume = "Python machine learning engineer"
+    # ----------------------
+    # Job Matching
+    # ----------------------
+    embed_model = SentenceTransformer('all-MiniLM-L6-v2')
 
-# Classification
-X_test = vectorizer.transform([test_resume])
-pred = clf.predict(X_test)[0]
+    resume_embedding = embed_model.encode([test_resume])
+    job_embeddings = embed_model.encode(jobs['job_description'].tolist())
 
-# Retrieval
-resume_embedding = embed_model.encode([test_resume])
-similarities = cosine_similarity(resume_embedding, job_embeddings)[0]
+    similarities = cosine_similarity(resume_embedding, job_embeddings)[0]
+    top_indices = similarities.argsort()[::-1][:3]
 
-top_indices = similarities.argsort()[::-1][:3]
+    print("\nTop Job Matches:")
+    for i in top_indices:
+        print(f"- {jobs.iloc[i]['job_title']}: {jobs.iloc[i]['job_description']}")
 
-# ----------------------
-# Output
-# ----------------------
-print("Predicted Category:", pred)
-print("\nTop Job Matches:")
-for i in top_indices:
-    print("-", job_descriptions[i])
+
+if __name__ == "__main__":
+    run_demo()
