@@ -41,7 +41,9 @@ def load_data():
     # ----------------------
     # Create LABEL
     # ----------------------
-    resumes['label'] = resumes['job_position_name']
+    resumes['label'] = resumes['job_position_name'].apply(simplify_label)
+    print("\nLabel distribution:")
+    print(resumes['label'].value_counts())
 
     # Drop rows with missing label/text
     resumes = resumes.dropna(subset=['text', 'label'])
