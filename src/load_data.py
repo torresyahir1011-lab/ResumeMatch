@@ -55,6 +55,9 @@ def load_data():
     resumes['career_objective'] + " " +
     resumes['positions']
     )
+
+    resumes['text'] = resumes['text'].str.lower()
+    resumes['text'] = resumes['text'].str.replace(r"[^a-zA-Z\s]", " ", regex=True)
     # ----------------------
     # Create LABEL
     # ----------------------
