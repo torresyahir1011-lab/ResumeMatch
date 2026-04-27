@@ -40,7 +40,7 @@ python src/main.py
 
 ## Video Links
 
-* Demo Video: INSERT_LINK_HERE
+* Demo Video: (https://youtu.be/Rixtjt-6ub4)
 * Technical Walkthrough: INSERT_LINK_HERE
 
 ---
