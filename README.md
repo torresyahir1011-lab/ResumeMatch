@@ -41,7 +41,7 @@ python src/main.py
 ## Video Links
 
 * Demo Video: (https://youtu.be/Rixtjt-6ub4)
-* Technical Walkthrough: INSERT_LINK_HERE
+* Technical Walkthrough: (https://youtu.be/rk4dyovPj80)
 
 ---
 
